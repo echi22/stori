@@ -1,0 +1,91 @@
+# Stori Transaction Processor
+
+This project processes a CSV file of debit and credit transactions for an account, stores the data in a SQLite database, and sends a summary email to the account's email address. The summary includes total balance, monthly transaction counts, and average debit/credit amounts, styled for easy reading.
+
+## Project Structure
+
+- `main.go` — Entry point; orchestrates DB setup, account loading, and transaction processing.
+- `db/` — Database logic (SQLite), account and transaction storage, idempotency.
+- `transaction/` — Transaction CSV parsing, validation, and grouping.
+- `email/` — Email sending logic and summary HTML generation.
+- `models/` — Shared data models.
+- `accounts.csv` — Account metadata (AccountID, Name, Email).
+- `transactions.csv` — Transaction data (AccountID, Id, Timestamp, Transaction).
+- `config.json` — SMTP and app configuration.
+- `stori_logo.png` — Logo for email branding.
+
+## Prerequisites
+
+- Go 1.21+
+- [SQLite3](https://www.sqlite.org/index.html) (for inspecting the DB, optional)
+
+## Setup & Execution
+
+1. **Clone the repository**
+2. **Install dependencies:**
+   ```sh
+   go mod tidy
+   ```
+3. **Configure SMTP and account info:**
+   - Edit `config.json` with your SMTP credentials (see below for safe testing).
+   - Edit `accounts.csv` and `transactions.csv` as needed.
+4. **Run the application:**
+   ```sh
+   go run main.go
+   ```
+5. **Check the output:**
+   - The summary email will be sent to the account's email address (from `accounts.csv`).
+   - The console will print a confirmation.
+
+## Safe Email Testing
+
+For development, use [Ethereal Email](https://ethereal.email/) or [Mailtrap](https://mailtrap.io/) for fake SMTP credentials. Example `config.json`:
+```json
+{
+  "smtp_host": "smtp.ethereal.email",
+  "smtp_port": 587,
+  "smtp_user": "your_ethereal_user@ethereal.email",
+  "smtp_pass": "your_ethereal_password",
+  "account_name": "Julien Terry",
+  "recipient_email": "recipient@example.com"
+}
+```
+
+## File Formats
+
+### accounts.csv
+```
+AccountID,Name,Email
+A123,Julien Terry,julien@example.com
+```
+
+### transactions.csv
+```
+AccountID,Id,Timestamp,Transaction
+A123,0,2024-05-10T09:15:00Z,+60.5
+A123,1,2024-05-15T15:00:00Z,-20.46
+...
+```
+- `Timestamp` must be in ISO 8601 format (e.g., `2024-07-08T14:23:00Z`).
+- Only one account per file is allowed; the program will error if multiple accounts are found.
+
+## Testing
+
+Run all tests with:
+```sh
+go test ./...
+```
+This covers CSV parsing, DB idempotency, summary generation, and error cases.
+
+## Notes
+- The database (`stori.db`) is idempotent: duplicate accounts and transactions are not created on repeated runs.
+- The summary email is styled and includes a logo (replace `stori_logo.png` with your own if desired).
+- If an account in the transactions file is not found in `accounts.csv`, the program will error.
+
+## Extending
+- To support multiple accounts per file, update the logic in `transaction/validate.go` and `main.go`.
+- To add more summary stats, edit `email/summary.go`.
+
+---
+
+**For any questions or improvements, feel free to open an issue or PR!** 
