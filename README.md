@@ -18,13 +18,17 @@ You can test the full workflow (S3 upload → Lambda → email) using the public
    - The upload to the `storifiles` S3 bucket will automatically trigger your AWS Lambda function (as configured).
 
 4. **Check the Email**  
-   - Log in to the email account configured to receive the summary.
-   - You should receive an email with the processed results from the Lambda function.
+   - Go to [https://ethereal.email/](https://ethereal.email/)
+   - Login with the SMTP credentials provided in your `config.json` (`smtp_user` and `smtp_pass`).
+   - Open the inbox to view the sent email.
+   - Sample output:
+   
+   ![Screenshot 2025-07-08 at 1 15 37 AM](https://github.com/user-attachments/assets/336d8d06-d505-4702-88fc-6685294abb6b)
+
 
 **Notes:**
 - Files uploaded via the web page are public in the S3 bucket. Do not upload sensitive data.
-- If you don’t see the email, check your Lambda logs in AWS CloudWatch for errors.
-- You can share [https://echi22.github.io/stori/](https://echi22.github.io/stori/) with others for easy testing.
+- I know this is insecure, it's just for testing purpouses.
 
 ---
 
@@ -70,7 +74,7 @@ You can launch this project in a GitHub Codespace (cloud-based dev environment) 
 
 ## Setup & Execution
 
-### Run with Docker (Recommended)
+### Run with Docker
 
 1. **Build the Docker image:**
    ```sh
@@ -84,9 +88,6 @@ You can launch this project in a GitHub Codespace (cloud-based dev environment) 
    - Go to [https://ethereal.email/](https://ethereal.email/)
    - Login with the SMTP credentials provided in your `config.json` (`smtp_user` and `smtp_pass`).
    - Open the inbox to view the sent email.
-   - Sample output:
-
-![Screenshot 2025-07-08 at 1 15 37 AM](https://github.com/user-attachments/assets/336d8d06-d505-4702-88fc-6685294abb6b)
 
 ### Run Locally (Go)
 
