@@ -41,6 +41,9 @@ This project processes a CSV file of debit and credit transactions for an accoun
      1. Go to [https://ethereal.email/](https://ethereal.email/)
      2. Login with the SMTP credentials provided in your `config.json` (`smtp_user` and `smtp_pass`).
      3. Open the inbox to view the sent email.
+   - Sample output:
+
+![Screenshot 2025-07-08 at 1 15 37 AM](https://github.com/user-attachments/assets/336d8d06-d505-4702-88fc-6685294abb6b)
 
 ## Security Note: SMTP Credentials
 
