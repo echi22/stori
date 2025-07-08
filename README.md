@@ -27,7 +27,8 @@ This project processes a CSV file of debit and credit transactions for an accoun
    go mod tidy
    ```
 3. **Configure SMTP and account info:**
-   - Edit `config.json` with your SMTP credentials (see below for safe testing).
+   - This project uses [Ethereal Email](https://ethereal.email/) for SMTP testing. Credentials are provided in `config.json`.
+   - **Note:** This is insecure and for challenge/demo purposes only. See below for production advice.
    - Edit `accounts.csv` and `transactions.csv` as needed.
 4. **Run the application:**
    ```sh
@@ -36,20 +37,17 @@ This project processes a CSV file of debit and credit transactions for an accoun
 5. **Check the output:**
    - The summary email will be sent to the account's email address (from `accounts.csv`).
    - The console will print a confirmation.
+   - **To view the email:**
+     1. Go to [https://ethereal.email/](https://ethereal.email/)
+     2. Login with the SMTP credentials provided in your `config.json` (`smtp_user` and `smtp_pass`).
+     3. Open the inbox to view the sent email.
 
-## Safe Email Testing
+## Security Note: SMTP Credentials
 
-For development, use [Ethereal Email](https://ethereal.email/) or [Mailtrap](https://mailtrap.io/) for fake SMTP credentials. Example `config.json`:
-```json
-{
-  "smtp_host": "smtp.ethereal.email",
-  "smtp_port": 587,
-  "smtp_user": "your_ethereal_user@ethereal.email",
-  "smtp_pass": "your_ethereal_password",
-  "account_name": "Julien Terry",
-  "recipient_email": "recipient@example.com"
-}
-```
+- **For this challenge, SMTP credentials are stored in `config.json` for simplicity.**
+- **This is insecure and should never be done in production.**
+- In a real-world application, secrets should be managed using environment variables or a secret manager (e.g., AWS Secrets Manager, Azure Key Vault, Google Secret Manager), and never committed to version control.
+- For more on Ethereal Email, see [https://ethereal.email/](https://ethereal.email/).
 
 ## File Formats
 
@@ -79,13 +77,11 @@ This covers CSV parsing, DB idempotency, summary generation, and error cases.
 
 ## Notes
 - The database (`stori.db`) is idempotent: duplicate accounts and transactions are not created on repeated runs.
-- The summary email is styled and includes a logo (replace `stori_logo.png` with your own if desired).
+- The summary email is styled and includes a logo.
 - If an account in the transactions file is not found in `accounts.csv`, the program will error.
 
 ## Extending
 - To support multiple accounts per file, update the logic in `transaction/validate.go` and `main.go`.
 - To add more summary stats, edit `email/summary.go`.
 
----
 
-**For any questions or improvements, feel free to open an issue or PR!** 
