@@ -14,6 +14,15 @@ This project processes a CSV file of debit and credit transactions for an accoun
 - `config.json` — SMTP and app configuration.
 - `stori_logo.png` — Logo for email branding.
 
+## Design Decisions
+
+- **Why `accounts.csv`?**
+  - Separating account metadata (ID, name, email) into its own file allows for clean normalization, easier updates, and future extensibility (e.g., supporting multiple accounts, richer metadata, or account lookups).
+
+- **Why `AccountID` and `Timestamp` in `transactions.csv`?**
+  - `AccountID` links each transaction to its account, enabling support for multiple accounts and ensuring data integrity.
+  - `Timestamp` (in ISO 8601 format) provides precise timing for each transaction, supports real-world scenarios (multiple transactions per day), and enables robust uniqueness and reporting (e.g., monthly summaries).
+
 ## Prerequisites
 
 - Go 1.21+
