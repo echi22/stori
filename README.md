@@ -108,6 +108,14 @@ See the section above for Codespaces instructions.
 
 See section above for Lambda instructions.
 
+### Note on Database Persistence in Lambda
+
+The Lambda function uses a SQLite database stored in the `/tmp` directory during each invocation. This database is **ephemeral**—it is created fresh for each Lambda run and is not persisted between invocations.
+
+- **Implication:** Data is not shared or saved across Lambda executions. Each run starts with an empty database.
+- **Production alternative:** For a real-world, persistent solution, use a managed database such as Amazon RDS (PostgreSQL/MySQL), DynamoDB, or another cloud database service.
+- **Why SQLite here?** This project uses SQLite in `/tmp` for simplicity and ease of local testing/demo purposes.
+
 ## Security Note: SMTP Credentials
 
 - **For this challenge, SMTP credentials are stored in `config.json` for simplicity.**
