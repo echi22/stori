@@ -2,6 +2,36 @@
 
 This project processes a CSV file of debit and credit transactions for an account, stores the data in a SQLite database, and sends a summary email to the account's email address. The summary includes total balance, monthly transaction counts, and average debit/credit amounts, styled for easy reading.
 
+## Test the Lambda Function with the Public Uploader
+
+You can test the full workflow (S3 upload → Lambda → email) using the public uploader:
+
+1. **Go to the Public Uploader Page**  
+   [https://echi22.github.io/stori/](https://echi22.github.io/stori/)
+
+2. **Upload a File**  
+   - Click "Select file to upload" and choose your transaction file (check below for correct format).
+   - Click "Upload."
+   - You should see a success message and a link to the uploaded file if the upload is successful.
+
+3. **Lambda Trigger**  
+   - The upload to the `storifiles` S3 bucket will automatically trigger your AWS Lambda function (as configured).
+
+4. **Check the Email**  
+   - Go to [https://ethereal.email/](https://ethereal.email/)
+   - Login with the SMTP credentials provided in your `config.json` (`smtp_user` and `smtp_pass`).
+   - Open the inbox to view the sent email.
+   - Sample output:
+   
+   ![Screenshot 2025-07-08 at 1 15 37 AM](https://github.com/user-attachments/assets/336d8d06-d505-4702-88fc-6685294abb6b)
+
+
+**Notes:**
+- Files uploaded via the web page are public in the S3 bucket. Do not upload sensitive data.
+- I know this is insecure, it's just for testing purpouses.
+
+---
+
 ## Try it Online
 
 You can launch this project in a GitHub Codespace (cloud-based dev environment) with all dependencies pre-installed:
@@ -44,7 +74,7 @@ You can launch this project in a GitHub Codespace (cloud-based dev environment) 
 
 ## Setup & Execution
 
-### Run with Docker (Recommended)
+### Run with Docker
 
 1. **Build the Docker image:**
    ```sh
@@ -58,9 +88,6 @@ You can launch this project in a GitHub Codespace (cloud-based dev environment) 
    - Go to [https://ethereal.email/](https://ethereal.email/)
    - Login with the SMTP credentials provided in your `config.json` (`smtp_user` and `smtp_pass`).
    - Open the inbox to view the sent email.
-   - Sample output:
-
-![Screenshot 2025-07-08 at 1 15 37 AM](https://github.com/user-attachments/assets/336d8d06-d505-4702-88fc-6685294abb6b)
 
 ### Run Locally (Go)
 
@@ -77,9 +104,9 @@ You can launch this project in a GitHub Codespace (cloud-based dev environment) 
 
 See the section above for Codespaces instructions.
 
-### AWS Lambda (Bonus)
+### AWS Lambda
 
-See `lambda_main.go` for a Lambda handler that can be deployed to AWS and triggered by S3 events. (See comments in the file for setup.)
+See section above for Lambda instructions.
 
 ## Security Note: SMTP Credentials
 
@@ -123,30 +150,5 @@ This covers CSV parsing, DB idempotency, summary generation, and error cases.
 - To support multiple accounts per file, update the logic in `transaction/validate.go` and `main.go`.
 - To add more summary stats, edit `email/summary.go`.
 
-## Test the Lambda Function with the Public Uploader
-
-You can test the full workflow (S3 upload → Lambda → email) using the public uploader:
-
-1. **Go to the Public Uploader Page**  
-   [https://echi22.github.io/stori/](https://echi22.github.io/stori/)
-
-2. **Upload a File**  
-   - Click "Select file to upload" and choose your transaction file (e.g., a CSV).
-   - Click "Upload."
-   - You should see a success message and a link to the uploaded file if the upload is successful.
-
-3. **Lambda Trigger**  
-   - The upload to the `storifiles` S3 bucket will automatically trigger your AWS Lambda function (as configured).
-
-4. **Check the Email**  
-   - Log in to the email account configured to receive the summary.
-   - You should receive an email with the processed results from the Lambda function.
-
-**Notes:**
-- Files uploaded via the web page are public in the S3 bucket. Do not upload sensitive data.
-- If you don’t see the email, check your Lambda logs in AWS CloudWatch for errors.
-- You can share [https://echi22.github.io/stori/](https://echi22.github.io/stori/) with others for easy testing.
-
----
 
 
