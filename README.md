@@ -2,6 +2,18 @@
 
 This project processes a CSV file of debit and credit transactions for an account, stores the data in a SQLite database, and sends a summary email to the account's email address. The summary includes total balance, monthly transaction counts, and average debit/credit amounts, styled for easy reading.
 
+## Try it Online
+
+You can launch this project in a GitHub Codespace (cloud-based dev environment) with all dependencies pre-installed:
+
+[![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new/echi22/stori)
+
+- No local setup required!
+- Just open a terminal and run:
+  ```sh
+  go run main.go
+  ```
+
 ## Project Structure
 
 - `main.go` — Entry point; orchestrates DB setup, account loading, and transaction processing.
@@ -50,7 +62,7 @@ This project processes a CSV file of debit and credit transactions for an accoun
      1. Go to [https://ethereal.email/](https://ethereal.email/)
      2. Login with the SMTP credentials provided in your `config.json` (`smtp_user` and `smtp_pass`).
      3. Open the inbox to view the sent email.
-   - Sample output:
+    - Sample output:
 
 ![Screenshot 2025-07-08 at 1 15 37 AM](https://github.com/user-attachments/assets/336d8d06-d505-4702-88fc-6685294abb6b)
 
