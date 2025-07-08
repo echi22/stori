@@ -104,9 +104,9 @@ You can launch this project in a GitHub Codespace (cloud-based dev environment) 
 
 See the section above for Codespaces instructions.
 
-### AWS Lambda (Bonus)
+### AWS Lambda
 
-See `lambda_main.go` for a Lambda handler that can be deployed to AWS and triggered by S3 events. (See comments in the file for setup.)
+See section above for Lambda instructions.
 
 ## Security Note: SMTP Credentials
 
