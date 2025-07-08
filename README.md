@@ -10,7 +10,7 @@ You can test the full workflow (S3 upload → Lambda → email) using the public
    [https://echi22.github.io/stori/](https://echi22.github.io/stori/)
 
 2. **Upload a File**  
-   - Click "Select file to upload" and choose your transaction file (e.g., a CSV).
+   - Click "Select file to upload" and choose your transaction file (check below for correct format).
    - Click "Upload."
    - You should see a success message and a link to the uploaded file if the upload is successful.
 
