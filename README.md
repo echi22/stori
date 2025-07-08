@@ -25,6 +25,7 @@ You can launch this project in a GitHub Codespace (cloud-based dev environment) 
 - `transactions.csv` — Transaction data (AccountID, Id, Timestamp, Transaction).
 - `config.json` — SMTP and app configuration.
 - `stori_logo.png` — Logo for email branding.
+- `Dockerfile` — For building and running the app in a container.
 
 ## Design Decisions
 
@@ -38,33 +39,47 @@ You can launch this project in a GitHub Codespace (cloud-based dev environment) 
 ## Prerequisites
 
 - Go 1.21+
+- [Docker](https://www.docker.com/) (for containerized testing)
 - [SQLite3](https://www.sqlite.org/index.html) (for inspecting the DB, optional)
 
 ## Setup & Execution
 
-1. **Clone the repository**
-2. **Install dependencies:**
+### Run with Docker (Recommended)
+
+1. **Build the Docker image:**
+   ```sh
+   docker build -t stori-app .
+   ```
+2. **Run the app in a container:**
+   ```sh
+   docker run --rm stori-app
+   ```
+3. **View the email:**
+   - Go to [https://ethereal.email/](https://ethereal.email/)
+   - Login with the SMTP credentials provided in your `config.json` (`smtp_user` and `smtp_pass`).
+   - Open the inbox to view the sent email.
+   - Sample output:
+
+![Screenshot 2025-07-08 at 1 15 37 AM](https://github.com/user-attachments/assets/336d8d06-d505-4702-88fc-6685294abb6b)
+
+### Run Locally (Go)
+
+1. **Install dependencies:**
    ```sh
    go mod tidy
    ```
-3. **Configure SMTP and account info:**
-   - This project uses [Ethereal Email](https://ethereal.email/) for SMTP testing. Credentials are provided in `config.json`.
-   - **Note:** This is insecure and for challenge/demo purposes only. See below for production advice.
-   - Edit `accounts.csv` and `transactions.csv` as needed.
-4. **Run the application:**
+2. **Run the application:**
    ```sh
    go run main.go
    ```
-5. **Check the output:**
-   - The summary email will be sent to the account's email address (from `accounts.csv`).
-   - The console will print a confirmation.
-   - **To view the email:**
-     1. Go to [https://ethereal.email/](https://ethereal.email/)
-     2. Login with the SMTP credentials provided in your `config.json` (`smtp_user` and `smtp_pass`).
-     3. Open the inbox to view the sent email.
-    - Sample output:
 
-![Screenshot 2025-07-08 at 1 15 37 AM](https://github.com/user-attachments/assets/336d8d06-d505-4702-88fc-6685294abb6b)
+### Try it Online (Codespaces)
+
+See the section above for Codespaces instructions.
+
+### AWS Lambda (Bonus)
+
+See `lambda_main.go` for a Lambda handler that can be deployed to AWS and triggered by S3 events. (See comments in the file for setup.)
 
 ## Security Note: SMTP Credentials
 
