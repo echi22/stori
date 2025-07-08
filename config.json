@@ -3,6 +3,5 @@
   "smtp_port": 587,
   "smtp_user": "julien.terry3@ethereal.email",
   "smtp_pass": "UmsJvTpsNATwGqfUwJ",
-  "account_name": "Julien Terry",
-  "recipient_email": "recipient@example.com"
-} 
+  "account_name": "Julien Terry"
+}
