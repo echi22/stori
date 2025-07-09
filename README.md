@@ -44,6 +44,13 @@ You can test the full workflow (S3 upload → Lambda → email) using the public
 - Files uploaded via the web page are public in the S3 bucket. Do not upload sensitive data.
 - This is for testing purposes only.
 
+Demo:
+
+
+https://github.com/user-attachments/assets/652187f6-efcd-4e63-8a95-669c60ff1e6b
+
+
+
 ---
 
 ## Try it Online
