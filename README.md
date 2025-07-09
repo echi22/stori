@@ -53,7 +53,8 @@ You can launch this project in a GitHub Codespace (cloud-based dev environment) 
 [![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new/echi22/stori)
 
 - No local setup required!
-- Just open a terminal and run:
+- **Update the email address in `accounts.csv` to your own email before running.**
+- Open a terminal and run:
   ```sh
   go run main.go
   ```
