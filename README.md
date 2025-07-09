@@ -9,17 +9,20 @@ You can test the full workflow (S3 upload → Lambda → email) using the public
 1. **Go to the Public Uploader Page**  
    [https://echi22.github.io/stori/](https://echi22.github.io/stori/)
 
-2. **Upload a File**  
+2. **Configure Account Info**  
+   - Use the "Update Account Info" form to set your Account ID, Name, and Email. This will generate and upload a new `accounts.csv` to S3.
+   - **Important:** The Account ID must match the one used in your transactions file.
+
+3. **Upload a Transactions File**  
    - Click "Select file to upload" and choose your transaction file (check below for correct format).
    - Click "Upload."
    - You should see a success message and a link to the uploaded file if the upload is successful.
 
-3. **Lambda Trigger**  
+4. **Lambda Trigger**  
    - The upload to the `storifiles` S3 bucket will automatically trigger your AWS Lambda function (as configured).
 
-4. **Check the Email**  
-   - **Update the email address in `accounts.csv` to your own email before uploading.**
-   - The summary email will be sent to the address specified in `accounts.csv` using Resend.
+5. **Check the Email**  
+   - The summary email will be sent to the address you entered in the Account Info form.
    - Check your inbox for the summary email. (If you don't see it, check your spam folder.)
    - Sample output:
    
@@ -45,15 +48,16 @@ You can launch this project in a GitHub Codespace (cloud-based dev environment) 
 
 ## Project Structure
 
-- `main.go` — Entry point; orchestrates DB setup, account loading, and transaction processing.
-- `db/` — Database logic (SQLite), account and transaction storage, idempotency.
+- `main.go` — Entry point for local/Docker execution; orchestrates DB setup, account loading, and transaction processing.
+- `lambda_main.go` — Entry point for AWS Lambda deployment; triggers the Lambda handler on S3 events.
+- `db/` — Database logic (SQLite); handles account and transaction storage, idempotency, and updates account emails if the account exists.
 - `transaction/` — Transaction CSV parsing, validation, and grouping.
 - `email/` — Email sending logic and summary HTML generation.
-- `models/` — Shared data models.
+- `models/` — Shared data models, including config options for logo type and value.
 - `accounts.csv` — Account metadata (AccountID, Name, Email).
 - `transactions.csv` — Transaction data (AccountID, Id, Timestamp, Transaction).
-- `config.json` — SMTP and app configuration.
-- `stori_logo.png` — Logo for email branding.
+- `config.json` — SMTP and app configuration, including logo options (`logo_type`, `logo_value`).
+- `stori_logo.png` — Logo for email branding (used if `logo_type` is `"file"`).
 - `Dockerfile` — For building and running the app in a container.
 
 ## Design Decisions
@@ -98,6 +102,10 @@ You can launch this project in a GitHub Codespace (cloud-based dev environment) 
    ```sh
    go run main.go
    ```
+3. **View the email:**
+   - **Update the email address in `accounts.csv` to your own email before running.**
+   - The summary email will be sent to the address specified in `accounts.csv` using Resend.
+   - Check your inbox for the summary email.
 
 ### Try it Online (Codespaces)
 
