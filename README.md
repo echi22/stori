@@ -2,6 +2,19 @@
 
 This project processes a CSV file of debit and credit transactions for an account, stores the data in a SQLite database, and sends a summary email to the account's email address using [Resend](https://resend.com/) for email delivery. The summary includes total balance, monthly transaction counts, and average debit/credit amounts, styled for easy reading.
 
+## Project Structure
+
+- `main.go` — Entry point for local/Docker execution; orchestrates DB setup, account loading, and transaction processing.
+- `lambda_main.go` — Entry point for AWS Lambda deployment; triggers the Lambda handler on S3 events.
+- `db/` — Database logic (SQLite); handles account and transaction storage, idempotency, and updates account emails if the account exists.
+- `transaction/` — Transaction CSV parsing, validation, and grouping.
+- `email/` — Email sending logic and summary HTML generation.
+- `models/` — Shared data models, including config options for logo type and value.
+- `accounts.csv` — Account metadata (AccountID, Name, Email).
+- `transactions.csv` — Transaction data (AccountID, Id, Timestamp, Transaction).
+- `config.json` — SMTP and app configuration.
+- `Dockerfile` — For building and running the app in a container.
+  
 ## Test the Lambda Function with the Public Uploader
 
 You can test the full workflow (S3 upload → Lambda → email) using the public uploader:
@@ -44,19 +57,6 @@ You can launch this project in a GitHub Codespace (cloud-based dev environment) 
   ```sh
   go run main.go
   ```
-
-## Project Structure
-
-- `main.go` — Entry point for local/Docker execution; orchestrates DB setup, account loading, and transaction processing.
-- `lambda_main.go` — Entry point for AWS Lambda deployment; triggers the Lambda handler on S3 events.
-- `db/` — Database logic (SQLite); handles account and transaction storage, idempotency, and updates account emails if the account exists.
-- `transaction/` — Transaction CSV parsing, validation, and grouping.
-- `email/` — Email sending logic and summary HTML generation.
-- `models/` — Shared data models, including config options for logo type and value.
-- `accounts.csv` — Account metadata (AccountID, Name, Email).
-- `transactions.csv` — Transaction data (AccountID, Id, Timestamp, Transaction).
-- `config.json` — SMTP and app configuration.
-- `Dockerfile` — For building and running the app in a container.
 
 ## Design Decisions
 
