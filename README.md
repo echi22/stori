@@ -1,6 +1,6 @@
 # Stori Transaction Processor
 
-This project processes a CSV file of debit and credit transactions for an account, stores the data in a SQLite database, and sends a summary email to the account's email address using [Resend](https://resend.com/) for email delivery. The summary includes total balance, monthly transaction counts, and average debit/credit amounts, styled for easy reading.
+This project processes a CSV file of debit and credit transactions for an account, stores the data in a SQLite database, and sends a summary email to the account's email address using [Brevo](https://brevo.com/) for email delivery. The summary includes total balance, monthly transaction counts, and average debit/credit amounts, styled for easy reading.
 
 ## Project Structure
 
@@ -76,34 +76,37 @@ You can launch this project in a GitHub Codespace (cloud-based dev environment) 
 ## Setup & Execution
 
 ### Run with Docker
+1.  **Update the email address in `accounts.csv` to your own email before running.**
 
-1. **Build the Docker image:**
+2. **Build the Docker image:**
    ```sh
    docker build -t stori-app .
    ```
-2. **Run the app in a container:**
+3. **Run the app in a container:**
    ```sh
    docker run --rm stori-app
    ```
-3. **View the email:**
-   - **Update the email address in `accounts.csv` to your own email before running.**
-   - The summary email will be sent to the address specified in `accounts.csv` using Resend.
+4. **View the email:**
+   - The summary email will be sent to the address specified in `accounts.csv` using Brevo.
    - Check your inbox for the summary email.
+   - If you can't find the email, check your spam folder
 
 ### Run Locally (Go)
 
-1. **Install dependencies:**
+1.  **Update the email address in `accounts.csv` to your own email before running.**
+
+2. **Install dependencies:**
    ```sh
    go mod tidy
    ```
-2. **Run the application:**
+3. **Run the application:**
    ```sh
    go run main.go
    ```
-3. **View the email:**
-   - **Update the email address in `accounts.csv` to your own email before running.**
-   - The summary email will be sent to the address specified in `accounts.csv` using Resend.
+4. **View the email:**
+   - The summary email will be sent to the address specified in `accounts.csv` using Brevo.
    - Check your inbox for the summary email.
+   - If you can't find the email, check your spam folder
 
 ### Try it Online (Codespaces)
 
