@@ -53,6 +53,7 @@ func HandleRequest(ctx context.Context, s3Event events.S3Event) error {
 		SMTPHost:       getEnv("SMTP_HOST", ""),
 		SMTPPort:       func() int { p, _ := strconv.Atoi(getEnv("SMTP_PORT", "587")); return p }(),
 		SMTPUser:       getEnv("SMTP_USER", ""),
+		FromEmail:      getEnv("FROM_EMAIL", ""),
 		SMTPPass:       getEnv("SMTP_PASS", ""),
 		AccountName:    getEnv("ACCOUNT_NAME", ""),
 		RecipientEmail: getEnv("RECIPIENT_EMAIL", ""),

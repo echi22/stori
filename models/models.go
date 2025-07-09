@@ -5,8 +5,11 @@ type Config struct {
 	SMTPPort       int    `json:"smtp_port"`
 	SMTPUser       string `json:"smtp_user"`
 	SMTPPass       string `json:"smtp_pass"`
+	FromEmail      string `json:"from_email"`
 	AccountName    string `json:"account_name"`
 	RecipientEmail string `json:"recipient_email"`
+	LogoType       string `json:"logo_type"` // "file", "base64", or "url"
+	LogoValue      string `json:"logo_value"`
 }
 
 type Account struct {

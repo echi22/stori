@@ -1,7 +1,10 @@
 {
-  "smtp_host": "smtp.ethereal.email",
+  "smtp_host": "smtp-relay.brevo.com",
   "smtp_port": 587,
-  "smtp_user": "julien.terry3@ethereal.email",
-  "smtp_pass": "UmsJvTpsNATwGqfUwJ",
-  "account_name": "Julien Terry"
+  "smtp_user": "91a27a001@smtp-brevo.com",
+  "smtp_pass": "VGU6ZAOvnTjWkaHQ",
+  "from_email": "ezecolautti@gmail.com",
+  "account_name": "Ezequiel Colautti",
+  "logo_type": "url",
+  "logo_value": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Stori_Logo_2023.svg/1024px-Stori_Logo_2023.svg.png"
 }

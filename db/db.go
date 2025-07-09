@@ -58,7 +58,12 @@ func (s *SQLiteDB) SaveAccount(account models.Account) (int, error) {
 	var id int64
 	rowsAffected, _ := res.RowsAffected()
 	if rowsAffected == 0 {
-		// Already exists, fetch id
+		// Already exists, update email and name
+		_, err = s.db.Exec("UPDATE account SET name = ?, email = ? WHERE account_id = ?", account.Name, account.Email, account.AccountID)
+		if err != nil {
+			return 0, err
+		}
+		// fetch id
 		row := s.db.QueryRow("SELECT id FROM account WHERE account_id = ?", account.AccountID)
 		row.Scan(&id)
 	} else {

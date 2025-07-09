@@ -18,7 +18,7 @@ type SMTPSender struct {
 
 func (s *SMTPSender) Send(recipient, subject, htmlBody, logoPath string) error {
 	auth := smtp.PlainAuth("", s.Config.SMTPUser, s.Config.SMTPPass, s.Config.SMTPHost)
-	from := s.Config.SMTPUser
+	from := s.Config.FromEmail
 	to := []string{recipient}
 
 	headers := make(map[string]string)
@@ -28,16 +28,21 @@ func (s *SMTPSender) Send(recipient, subject, htmlBody, logoPath string) error {
 	headers["MIME-Version"] = "1.0"
 	headers["Content-Type"] = "text/html; charset=\"UTF-8\""
 
-	logoBase64 := ""
-	if logoPath != "" {
-		data, err := os.ReadFile(logoPath)
-		if err == nil {
-			logoBase64 = base64.StdEncoding.EncodeToString(data)
-		}
-	}
+	// for limitations in the email service, we need to use an external logo
 	logoHTML := ""
-	if logoBase64 != "" {
-		logoHTML = fmt.Sprintf(`<img src="data:image/png;base64,%s" alt="Stori Logo" style="width:120px;">`, logoBase64)
+	if s.Config.LogoType == "url" && s.Config.LogoValue != "" {
+		logoHTML = fmt.Sprintf(`<img src="%s" alt="Stori Logo" style="width:120px;">`, s.Config.LogoValue)
+	} else {
+		logoBase64 := ""
+		if logoPath != "" {
+			data, err := os.ReadFile(logoPath)
+			if err == nil {
+				logoBase64 = base64.StdEncoding.EncodeToString(data)
+			}
+		}
+		if logoBase64 != "" {
+			logoHTML = fmt.Sprintf(`<img src="data:image/png;base64,%s" alt="Stori Logo" style="width:120px;">`, logoBase64)
+		}
 	}
 
 	message := ""
