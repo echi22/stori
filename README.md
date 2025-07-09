@@ -16,7 +16,6 @@ You can test the full workflow (S3 upload → Lambda → email) using the public
 3. **Upload a Transactions File**  
    - Click "Select file to upload" and choose your transaction file (check below for correct format).
    - Click "Upload."
-   - You should see a success message and a link to the uploaded file if the upload is successful.
 
 4. **Lambda Trigger**  
    - The upload to the `storifiles` S3 bucket will automatically trigger your AWS Lambda function (as configured).
