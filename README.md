@@ -12,7 +12,7 @@ This project processes a CSV file of debit and credit transactions for an accoun
 - `models/` — Shared data models, including config options for logo type and value.
 - `accounts.csv` — Account metadata (AccountID, Name, Email).
 - `transactions.csv` — Transaction data (AccountID, Id, Timestamp, Transaction).
-- `config.json` — SMTP and app configuration.
+- `config.json` — SMTP and app configuration. (It has SMTP sensitive information. This shouldn't be done in prod, it's just for simplicity)
 - `Dockerfile` — For building and running the app in a container.
   
 ## Test the Lambda Function with the Public Uploader
