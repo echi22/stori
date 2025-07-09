@@ -112,9 +112,10 @@
           return;
         }
         const file = fileInput.files[0];
+        const prefix = "transactions/";
         const url =
           "https://storifiles.s3.amazonaws.com/" +
-          encodeURIComponent(file.name);
+          encodeURIComponent(prefix + file.name);
         resultDiv.textContent = "Uploading...";
         fetch(url, {
           method: "PUT",
