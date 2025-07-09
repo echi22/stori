@@ -57,6 +57,7 @@ func HandleRequest(ctx context.Context, s3Event events.S3Event) error {
 		SMTPPass:       getEnv("SMTP_PASS", ""),
 		AccountName:    getEnv("ACCOUNT_NAME", ""),
 		RecipientEmail: getEnv("RECIPIENT_EMAIL", ""),
+		LogoValue:      getEnv("LOGO_VALUE", ""),	
 	}
 
 	// Download accounts.csv (assume in same bucket, or use bundled file)

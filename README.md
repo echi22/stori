@@ -56,8 +56,7 @@ You can launch this project in a GitHub Codespace (cloud-based dev environment) 
 - `models/` — Shared data models, including config options for logo type and value.
 - `accounts.csv` — Account metadata (AccountID, Name, Email).
 - `transactions.csv` — Transaction data (AccountID, Id, Timestamp, Transaction).
-- `config.json` — SMTP and app configuration, including logo options (`logo_type`, `logo_value`).
-- `stori_logo.png` — Logo for email branding (used if `logo_type` is `"file"`).
+- `config.json` — SMTP and app configuration.
 - `Dockerfile` — For building and running the app in a container.
 
 ## Design Decisions
