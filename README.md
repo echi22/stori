@@ -121,12 +121,12 @@ The Lambda function uses a SQLite database stored in the `/tmp` directory during
 - **Production alternative:** For a real-world, persistent solution, use a managed database such as Amazon RDS (PostgreSQL/MySQL), DynamoDB, or another cloud database service.
 - **Why SQLite here?** This project uses SQLite in `/tmp` for simplicity and ease of local testing/demo purposes.
 
-## Security Note: SMTP Credentials and Resend
+## Security Note: SMTP Credentials and Brevo
 
-- **This project uses [Resend](https://resend.com/) for email delivery.**
+- **This project uses [Brevo](https://www.brevo.com/) for email delivery.**
 - SMTP credentials are stored in `config.json` for simplicity. **This is insecure and should never be done in production.**
 - In a real-world application, secrets should be managed using environment variables or a secret manager (e.g., AWS Secrets Manager, Azure Key Vault, Google Secret Manager), and never committed to version control.
-- For more on Resend, see [https://resend.com/](https://resend.com/).
+- For more on Brevo, see [https://www.brevo.com/](https://www.brevo.com/).
 
 ## File Formats
 

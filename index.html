@@ -127,9 +127,7 @@
           .then((response) => {
             if (response.ok) {
               resultDiv.innerHTML =
-                '✅ Uploaded! <br><a href="' +
-                url +
-                '" target="_blank">View file</a>';
+                '✅ Uploaded! <br>If data is ok you should receive an email with the summary';
             } else {
               resultDiv.textContent =
                 "Error: " + response.status + " " + response.statusText;
