@@ -1,7 +1,8 @@
 {
   "name": "Go Codespace",
   "image": "mcr.microsoft.com/devcontainers/go:1.21",
-  "postCreateCommand": "apt-get update && apt-get install -y sqlite3 && go mod tidy",
+  "initializeCommand": "apt-get update && apt-get install -y sqlite3",
+  "postCreateCommand": "go mod tidy",
   "customizations": {
     "vscode": {
       "extensions": ["golang.go"]
